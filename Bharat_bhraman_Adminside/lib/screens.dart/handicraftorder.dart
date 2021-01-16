@@ -20,7 +20,7 @@ class _HandicraftorderState extends State<Handicraftorder> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Handicraft Orders"),
+        title: Text("BarCode Scanner"),
       ),
       body: Container(
         padding: EdgeInsets.all(20.0),
