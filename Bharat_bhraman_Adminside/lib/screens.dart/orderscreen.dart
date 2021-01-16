@@ -34,24 +34,93 @@ class _OrderscreenState extends State<Orderscreen> {
             itemCount: snapshot.data.length,
             itemBuilder: (context, i) {
               return snapshot.data.length != 0
-                  ? ListTile(
-                      leading: Container(
-                        margin: EdgeInsets.symmetric(vertical: 5),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
+                  ? Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                elevation: 4,
+                margin: EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget>[
+                    Stack(
+                      children: <Widget>[
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15),
+                          ),
                           child: Image.network(
                             snapshot.data[i].imageurl,
-                            fit: BoxFit.fill,
-                            height: 50,
-                            width: 50,
+                            height: 250,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
                           ),
                         ),
-                      ),
-                      title: Text(
-                          "${snapshot.data[i].name}\nYour Name:${snapshot.data[i].cname}\nAddress:${snapshot.data[i].address},${snapshot.data[i].city},${snapshot.data[i].state},${snapshot.data[i].pincode}\nphoneno:${snapshot.data[i].phoneno}"),
-                      subtitle: Text(snapshot.data[i].amount),
-                      trailing: Text(snapshot.data[i].transactionid),
-                    )
+                        Positioned(
+                          bottom: 20,
+                          right: 10,
+                          child: Container(
+                            width: 300,
+                            color: Colors.black54,
+                            padding: EdgeInsets.symmetric(
+                              vertical: 5,
+                              horizontal: 20,
+                            ),
+                            child: Text(
+                              snapshot.data[i].name,
+                              style: TextStyle(
+                                fontSize: 26,
+                                color: Colors.white,
+                              ),
+                              softWrap: true,
+                              overflow: TextOverflow.fade,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text('Name',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                            Text(snapshot.data[i].cname),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text('Address',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                            Text(snapshot.data[i].address),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text('City',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                            Text(snapshot.data[i].city),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text('Phone No.',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                            Text(snapshot.data[i].phoneno),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text('Pincode',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                            Text(snapshot.data[i].pincode),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
                   : Container(
                       height: size.height,
                       width: size.width,
